@@ -21,13 +21,14 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title:  'Flutter Demo',
       theme: ThemeData(
         accentColor: Colors.red,
         primarySwatch: Colors.red,
         accentTextTheme: Typography.whiteCupertino,
-        backgroundColor: Colors.blue,
+        canvasColor: Colors.orangeAccent,
       ),
       home: Navigator(
         pages: [
@@ -62,6 +63,7 @@ class MyAppState extends State<MyApp> {
   }
 }
 
+
 class AmountCalculator extends StatefulWidget {
   AmountCalculator({Key key, this.title, this.onNext}) : super(key: key);
   final String title;
@@ -85,6 +87,7 @@ class _AmountCalculatorState extends State<AmountCalculator> {
     super.dispose();
   }
 
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -95,11 +98,16 @@ class _AmountCalculatorState extends State<AmountCalculator> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextField(
-             decoration: InputDecoration(
-              hintText: 'Enter amount to be paid',
-               fillColor: Colors.grey[199],
-               filled: true,
-             ),
+              decoration: new InputDecoration(
+                labelText: "Enter bill amount paid",
+                fillColor: Colors.grey[200],
+                filled: true,
+                border: new OutlineInputBorder(
+                  borderRadius: new BorderRadius.circular(25.0),
+                  borderSide: new BorderSide(
+                  ),
+                ),
+              ),
               textAlign: TextAlign.center,
               controller: _controller,
               onChanged: (String value) async {
@@ -141,7 +149,7 @@ class _TipCalculatorState extends State<TipCalculator> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Here's your bill"),
-          content: Text ('  Amount Paid: ' +
+          content: Text (' Amount Paid: ' +
               widget.amount.toString() + '\n Tips Paid: $_tip \n Total Amount: $_total'),
           actions: <Widget>[
             TextButton(
@@ -186,10 +194,15 @@ class _TipCalculatorState extends State<TipCalculator> {
             ),
 
             TextField(
-              decoration: InputDecoration(
-                hintText: 'Enter percentage of bill given as tip',
-                fillColor: Colors.grey[199],
+              decoration: new InputDecoration(
+                labelText: "Tip Percentage",
+                fillColor: Colors.white,
                 filled: true,
+                border: new OutlineInputBorder(
+                  borderRadius: new BorderRadius.circular(25.0),
+                  borderSide: new BorderSide(
+                  ),
+                ),
               ),
               textAlign: TextAlign.center,
               controller: _controlTip,
