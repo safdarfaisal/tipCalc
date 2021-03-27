@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '';
+
 
 void main() {
   runApp(MyApp());
@@ -23,12 +25,13 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      title:  'Flutter Demo',
+      title:  'Tip Calculator',
       theme: ThemeData(
         accentColor: Colors.red,
         primarySwatch: Colors.red,
         accentTextTheme: Typography.whiteCupertino,
-        canvasColor: Colors.orangeAccent,
+        canvasColor: Colors.grey[400],
+
       ),
       home: Navigator(
         pages: [
@@ -94,21 +97,27 @@ class _AmountCalculatorState extends State<AmountCalculator> {
         title: Text(widget.title),
       ),
       body: Center(
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextField(
               decoration: new InputDecoration(
+                labelStyle: TextStyle(
+                    fontSize: 20,
+                  textBaseline: TextBaseline.alphabetic ,
+                ),
                 labelText: "Enter bill amount paid",
                 fillColor: Colors.grey[200],
                 filled: true,
-                border: new OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(25.0),
+                border: new UnderlineInputBorder(
+                  borderRadius: new BorderRadius.circular(20.0),
                   borderSide: new BorderSide(
                   ),
                 ),
               ),
               textAlign: TextAlign.center,
+
               controller: _controller,
               onChanged: (String value) async {
                 _amount = double.parse(value);
@@ -149,8 +158,8 @@ class _TipCalculatorState extends State<TipCalculator> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Here's your bill"),
-          content: Text (' Amount Paid: ' +
-              widget.amount.toString() + '\n Tips Paid: $_tip \n Total Amount: $_total'),
+          content: Text (' Bill Amount: ' +
+              widget.amount.toString() + '\n Tips: $_tip \n Total Amount: $_total'),
           actions: <Widget>[
             TextButton(
               onPressed: () { Navigator.pop(context); },
@@ -195,10 +204,13 @@ class _TipCalculatorState extends State<TipCalculator> {
 
             TextField(
               decoration: new InputDecoration(
+                labelStyle: TextStyle(
+                  fontSize: 20,
+                ),
                 labelText: "Tip Percentage",
                 fillColor: Colors.white,
                 filled: true,
-                border: new OutlineInputBorder(
+                border: new UnderlineInputBorder(
                   borderRadius: new BorderRadius.circular(25.0),
                   borderSide: new BorderSide(
                   ),
