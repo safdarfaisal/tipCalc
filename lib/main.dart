@@ -24,7 +24,10 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       title:  'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        accentColor: Colors.red,
+        primarySwatch: Colors.red,
+        accentTextTheme: Typography.whiteCupertino,
+        backgroundColor: Colors.blue,
       ),
       home: Navigator(
         pages: [
@@ -91,10 +94,12 @@ class _AmountCalculatorState extends State<AmountCalculator> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Enter Amount to be paid:',
-            ),
             TextField(
+             decoration: InputDecoration(
+              hintText: 'Enter amount to be paid',
+               fillColor: Colors.grey[199],
+               filled: true,
+             ),
               textAlign: TextAlign.center,
               controller: _controller,
               onChanged: (String value) async {
@@ -136,8 +141,8 @@ class _TipCalculatorState extends State<TipCalculator> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Here's your bill"),
-          content: Text (' Total Amount: $_total \n Amount Paid: ' +
-              widget.amount.toString() + '\n Tips Paid: $_tip'),
+          content: Text ('  Amount Paid: ' +
+              widget.amount.toString() + '\n Tips Paid: $_tip \n Total Amount: $_total'),
           actions: <Widget>[
             TextButton(
               onPressed: () { Navigator.pop(context); },
@@ -173,15 +178,19 @@ class _TipCalculatorState extends State<TipCalculator> {
           children: <Widget>[
 
             Text(
-                'Amount before tips: ' + widget.amount.toString()
+                'Amount before tips: ' + widget.amount.toString(),
+                textScaleFactor: 1.5,
             ),
             Padding(
               padding: EdgeInsets.all(4.0),
             ),
-            Padding(
-              padding: EdgeInsets.all(16.0),
-            ),
+
             TextField(
+              decoration: InputDecoration(
+                hintText: 'Enter percentage of bill given as tip',
+                fillColor: Colors.grey[199],
+                filled: true,
+              ),
               textAlign: TextAlign.center,
               controller: _controlTip,
               onChanged: (String value) async {
@@ -191,12 +200,10 @@ class _TipCalculatorState extends State<TipCalculator> {
             Padding(
               padding: EdgeInsets.all(4.0),
             ),
-            Text(
-              'Enter tip percentage',
-            ),
           ],
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: calculateTotal,
         child: Text(
